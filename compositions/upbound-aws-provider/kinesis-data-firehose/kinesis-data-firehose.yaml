@@ -1,6 +1,6 @@
 
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: MIT-0
+# SPDX-License-Identifier: Apache-2.0
 
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
@@ -30,7 +30,7 @@ spec:
           toFieldPath: spec.forProvider.tags
           policy:
             mergeOptions:
-              appendSlice: true
+              keepMapValues: true
         - type: FromCompositeFieldPath
           fromFieldPath: spec.resourceConfig.name
           toFieldPath: metadata.annotations[crossplane.io/external-name]

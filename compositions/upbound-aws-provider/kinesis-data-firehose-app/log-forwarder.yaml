@@ -1,6 +1,6 @@
 
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: MIT-0
+# SPDX-License-Identifier: Apache-2.0
 
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
@@ -36,7 +36,7 @@ spec:
           toFieldPath: spec.forProvider.tags
           policy:
             mergeOptions:
-              appendSlice: true
+              keepMapValues: true
         - fromFieldPath: "metadata.name"
           toFieldPath: "metadata.name"
   environment:
@@ -203,8 +203,7 @@ spec:
               awsblueprints.io/provider: aws
               awsblueprints.io/environment: dev
               iam.awsblueprints.io/policy-type: write
-              iam.awsblueprints.io/service: s3
-              iam.awsblueprints.io/from-service: firehose
+              iam.awsblueprints.io/service: firehose-s3
       patches:
         - type: PatchSet
           patchSetName: common-fields-composition

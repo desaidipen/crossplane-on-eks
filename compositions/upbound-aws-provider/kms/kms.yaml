@@ -1,5 +1,5 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: MIT-0
+# SPDX-License-Identifier: Apache-2.0
 
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
@@ -24,12 +24,6 @@ spec:
         - type: FromCompositeFieldPath
           fromFieldPath: spec.resourceConfig.providerConfigName
           toFieldPath: spec.providerConfigRef.name
-        - type: FromCompositeFieldPath
-          fromFieldPath: spec.resourceConfig.tags
-          toFieldPath: spec.forProvider.tags
-          policy:
-            mergeOptions:
-              appendSlice: true
   resources:
     - name: key
       base:
@@ -51,6 +45,12 @@ spec:
         - type: ToCompositeFieldPath
           fromFieldPath: status.atProvider.keyId
           toFieldPath: status.keyId
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.resourceConfig.tags
+          toFieldPath: spec.forProvider.tags
+          policy:
+            mergeOptions:
+              keepMapValues: true
     - name: alais
       base:
         apiVersion: kms.aws.upbound.io/v1beta1
